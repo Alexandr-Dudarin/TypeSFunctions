@@ -1,7 +1,7 @@
 // Задание 1
-function doubleFactorial(n) {
+var doubleFactorial = function (n) {
     if (typeof n !== 'number' || !Number.isInteger(n)) {
-        console.error('Ошибка: входное значение должно быть целым числом.');
+        console.error('Ошибка: используются только целые числа');
         return null;
     }
     if (n < 0) {
@@ -13,13 +13,13 @@ function doubleFactorial(n) {
         result *= i;
     }
     return result;
-}
+};
 console.log(doubleFactorial(8)); // 8 * 6 * 4 * 2 = 384
 console.log(doubleFactorial(7)); // 7 * 5 * 3 * 1 = 105
 console.log(doubleFactorial(-5)); // Ошибка
 console.log(doubleFactorial("10")); // Ошибка
 // Задание 2
-function numbersOnly() {
+var numbersOnly = function () {
     var arr = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         arr[_i] = arguments[_i];
@@ -32,12 +32,29 @@ function numbersOnly() {
         }
     }
     return arrNumbersOnly;
-}
+};
 console.log(numbersOnly(1, 'a', 2, 'b', 3)); // [1, 2, 3]
 console.log(numbersOnly('hello', 42, 'world', 7)); // [42, 7]
 console.log(numbersOnly('call', 'dog')); // []
 console.log(numbersOnly('one', 2, '3', 4)); // [2, 4]
-function calculate(arg1, arg2, operator) {
+// Задание 3
+var performOperation = function (a, b, op) {
+    switch (op) {
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            if (b === 0)
+                throw new Error("Деление на ноль");
+            return a / b;
+        default:
+            throw new Error("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u043E\u043F\u0435\u0440\u0430\u0442\u043E\u0440: ".concat(op));
+    }
+};
+var calculate = function (arg1, arg2, operator) {
     if (typeof arg1 === 'number' && typeof arg2 === 'number' && operator) {
         return performOperation(arg1, arg2, operator);
     }
@@ -56,23 +73,7 @@ function calculate(arg1, arg2, operator) {
     else {
         throw new Error("Недопустимые аргументы");
     }
-}
-function performOperation(a, b, op) {
-    switch (op) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '/':
-            if (b === 0)
-                throw new Error("Деление на ноль");
-            return a / b;
-        default:
-            throw new Error("\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u043E\u043F\u0435\u0440\u0430\u0442\u043E\u0440: ".concat(op));
-    }
-}
+};
 console.log(calculate(5, 3, '+')); // 8
 console.log(calculate([1, 2, 3, 4], ['+', '*', '-'])); // 5
 console.log(calculate([6, 10], ['*'])); // 60

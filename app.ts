@@ -1,7 +1,7 @@
 // Задание 1
-function doubleFactorial(n: any): number | null {
+const doubleFactorial = (n: any): number | null => {
     if (typeof n !== 'number' || !Number.isInteger(n)) {
-        console.error('Ошибка: входное значение должно быть целым числом.');
+        console.error('Ошибка: используются только целые числа');
         return null;
     }
 
@@ -16,7 +16,7 @@ function doubleFactorial(n: any): number | null {
     }
 
     return result;
-}
+};
 
 console.log(doubleFactorial(8)); // 8 * 6 * 4 * 2 = 384
 console.log(doubleFactorial(7)); // 7 * 5 * 3 * 1 = 105
@@ -27,18 +27,15 @@ console.log(doubleFactorial("10")); // Ошибка
 
 
 // Задание 2
-function numbersOnly(...arr: (number | string)[]): number[] {
-
+const numbersOnly = (...arr: (number | string)[]): number[] => {
     let arrNumbersOnly: number[] = [];
-
     for (const element of arr) {
         if (typeof element === 'number') {
             arrNumbersOnly.push(element);
         }
     }
-
-    return arrNumbersOnly
-}
+    return arrNumbersOnly;
+};
 
 console.log(numbersOnly(1, 'a', 2, 'b', 3)); // [1, 2, 3]
 console.log(numbersOnly('hello', 42, 'world', 7)); // [42, 7]
@@ -49,49 +46,44 @@ console.log(numbersOnly('one', 2, '3', 4)); // [2, 4]
 
 
 // Задание 3
-function calculate(num1: number, num2: number, operator: '+' | '-' | '*' | '/'): number;
-function calculate(numbers: number[], operators: ('+' | '-' | '*' | '/')[]): number;
-
-function calculate(
-  arg1: number | number[],
-  arg2?: number | ('+' | '-' | '*' | '/')[],
-  operator?: '+' | '-' | '*' | '/'
-): number {
-  if (typeof arg1 === 'number' && typeof arg2 === 'number' && operator) {
-
-    return performOperation(arg1, arg2, operator);
-  } else if (Array.isArray(arg1) && Array.isArray(arg2)) {
-
-    const numbers = arg1;
-    const operators = arg2;
-    if (numbers.length !== operators.length + 1) {
-      throw new Error("Длина массива чисел должна быть на один больше, чем массив операторов");
+const performOperation = (a: number, b: number, op: '+' | '-' | '*' | '/'): number => {
+    switch (op) {
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            if (b === 0) throw new Error("Деление на ноль");
+            return a / b;
+        default:
+            throw new Error(`Неизвестный оператор: ${op}`);
     }
-    let result = numbers[0];
-    for (let i = 0; i < operators.length; i++) {
-      result = performOperation(result, numbers[i + 1], operators[i]);
-    }
-    return result;
-  } else {
-    throw new Error("Недопустимые аргументы");
-  }
-}
+};
 
-function performOperation(a: number, b: number, op: '+' | '-' | '*' | '/'): number {
-  switch (op) {
-    case '+':
-      return a + b;
-    case '-':
-      return a - b;
-    case '*':
-      return a * b;
-    case '/':
-      if (b === 0) throw new Error("Деление на ноль");
-      return a / b;
-    default:
-      throw new Error(`Неизвестный оператор: ${op}`);
-  }
-}
+const calculate = (
+    arg1: number | number[],
+    arg2?: number | ('+' | '-' | '*' | '/')[],
+    operator?: '+' | '-' | '*' | '/'
+): number => {
+    if (typeof arg1 === 'number' && typeof arg2 === 'number' && operator) {
+        return performOperation(arg1, arg2, operator);
+    } else if (Array.isArray(arg1) && Array.isArray(arg2)) {
+        const numbers = arg1;
+        const operators = arg2;
+        if (numbers.length !== operators.length + 1) {
+            throw new Error("Длина массива чисел должна быть на один больше, чем массив операторов");
+        }
+        let result = numbers[0];
+        for (let i = 0; i < operators.length; i++) {
+            result = performOperation(result, numbers[i + 1], operators[i]);
+        }
+        return result;
+    } else {
+        throw new Error("Недопустимые аргументы");
+    }
+};
 
 console.log(calculate(5, 3, '+')); // 8
 console.log(calculate([1, 2, 3, 4], ['+', '*', '-'])); // 5
