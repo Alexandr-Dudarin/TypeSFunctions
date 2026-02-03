@@ -89,3 +89,30 @@ console.log(calculate(5, 3, '+')); // 8
 console.log(calculate([1, 2, 3, 4], ['+', '*', '-'])); // 5
 console.log(calculate([6, 10], ['*'])); // 60
 console.log(calculate([3, 1, 2, 1, 1], ['-', '*', '*', '-'])); // 3
+
+
+
+
+// Задание 5
+
+type Operation = (num: number) => number;
+
+function applyOperation(arr: number[], operation: Operation): number[] {
+  return arr.map(operation);
+}
+
+const double: Operation = (num) => num * 2;
+const square: Operation = (num) => num * num;
+const increment: Operation = (num) => num + 1;
+
+const array1 = [1, 2, 3, 4, 5];
+
+console.log(applyOperation(array1, double));      // [2, 4, 6, 8, 10]
+console.log(applyOperation(array1, square));      // [1, 4, 9, 16, 25]
+console.log(applyOperation(array1, increment));   // [2, 3, 4, 5, 6]
+
+const array2 = [-1, 0, 1];
+
+console.log(applyOperation(array2, double));      // [-2, 0, 2]
+console.log(applyOperation(array2, square));      // [1, 0, 1]
+console.log(applyOperation(array2, increment));   // [0, 1, 2]
