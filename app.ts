@@ -97,9 +97,9 @@ console.log(calculate([3, 1, 2, 1, 1], ['-', '*', '*', '-'])); // 3
 
 type Operation = (num: number) => number;
 
-function applyOperation(arr: number[], operation: Operation): number[] {
+const applyOperation = (arr: number[], operation: Operation): number[] => {
   return arr.map(operation);
-}
+};
 
 const double: Operation = (num) => num * 2;
 const square: Operation = (num) => num * num;

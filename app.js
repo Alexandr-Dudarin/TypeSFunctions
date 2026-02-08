@@ -78,9 +78,9 @@ console.log(calculate(5, 3, '+')); // 8
 console.log(calculate([1, 2, 3, 4], ['+', '*', '-'])); // 5
 console.log(calculate([6, 10], ['*'])); // 60
 console.log(calculate([3, 1, 2, 1, 1], ['-', '*', '*', '-'])); // 3
-function applyOperation(arr, operation) {
+var applyOperation = function (arr, operation) {
     return arr.map(operation);
-}
+};
 var double = function (num) { return num * 2; };
 var square = function (num) { return num * num; };
 var increment = function (num) { return num + 1; };
